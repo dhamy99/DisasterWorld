@@ -8,9 +8,22 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private float inputH;
+    [Header("Movement System")]
     [SerializeField] private float speedMovement;
     [SerializeField] private float jumpForce;
+    [SerializeField] private Transform playerFoots;
+    [SerializeField] private LayerMask beJumpable;
+    [SerializeField] private float radiusJump;
     private Animator animator;
+
+    [Header("Combat Engine")]
+    [SerializeField] private Transform pointAttack;
+    [SerializeField] private float radiusAttack;
+    [SerializeField] private LayerMask beDamaged;
+    [SerializeField] private float damage;
+
+    
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -21,7 +34,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Move();
-        Attack();
+        BeginAttack();
         Jump();
     
     }
@@ -49,7 +62,7 @@ public class Player : MonoBehaviour
 
     }
 
-    private void Attack()
+    private void BeginAttack()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -57,12 +70,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Attack()
+    {
+        Collider2D[] others = Physics2D.OverlapCircleAll(pointAttack.position, radiusAttack, beDamaged);
+
+        foreach(Collider2D other in others)
+        {
+            other.gameObject.GetComponent<LifeEngine>().GetDamage(damage);
+        }
+    }
+
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && BeOnGround())
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             animator.SetTrigger("jump");
         }
+    }
+
+    private bool BeOnGround()
+    {
+        return Physics2D.Raycast(playerFoots.position, Vector3.down, radiusJump, beJumpable);
     }
 }
