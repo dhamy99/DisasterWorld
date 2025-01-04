@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bat : MonoBehaviour
+public class Bat : Enemy
 {
     // Start is called before the first frame update
     [SerializeField] private Transform[] pointsPathfinding;
@@ -63,5 +63,10 @@ public class Bat : MonoBehaviour
         {
             other.gameObject.GetComponent<LifeEngine>().GetDamage(damage);
         }
+    }
+
+    protected override void Attack()
+    {
+        Debug.Log("asdfsadfsdf");
     }
 }

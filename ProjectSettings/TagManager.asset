@@ -6,6 +6,8 @@ TagManager:
   tags:
   - PlayerHitbox
   - PlayerDetection
+  - Door
+  - Key
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - HitBox
   - Detections
   - Ground
-  - 
+  - Interactuable
   - 
   - 
   - 

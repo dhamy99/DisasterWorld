@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mage : MonoBehaviour
+public class Mage : Enemy
 {
     private Animator anim;
 
@@ -53,8 +53,9 @@ public class Mage : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    protected override void Attack()
     {
         Instantiate(fireBall, firBallSpawn.position, transform.rotation);
     }
+
 }

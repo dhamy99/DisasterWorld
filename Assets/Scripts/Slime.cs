@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Slime : MonoBehaviour
+public class Slime : Enemy
 {
     // Start is called before the first frame update
     [SerializeField] private Transform[] pointsPathfinding;
@@ -55,5 +55,10 @@ public class Slime : MonoBehaviour
         {
             other.gameObject.GetComponent<LifeEngine>().GetDamage(damage);
         }
+    }
+
+    protected override void Attack()
+    {
+        Debug.Log("asdfsadfsdf");
     }
 }

@@ -22,6 +22,11 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask beDamaged;
     [SerializeField] private float damage;
 
+    [Header("Interaction elements")]
+    [SerializeField] private Transform detectionPoint;
+    [SerializeField] private float detectionRadio;
+    [SerializeField] private LayerMask whatIsInteractable;
+
     
 
     private void Start()
@@ -36,7 +41,8 @@ public class Player : MonoBehaviour
         Move();
         BeginAttack();
         Jump();
-    
+        Interact();
+
     }
 
     private void Move()
@@ -93,4 +99,23 @@ public class Player : MonoBehaviour
     {
         return Physics2D.Raycast(playerFoots.position, Vector3.down, radiusJump, beJumpable);
     }
+
+    private void Interact()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            
+            Collider2D collide = Physics2D.OverlapCircle(detectionPoint.position, detectionRadio, whatIsInteractable);
+
+            if (collide != null)
+            {
+                
+                if (collide.TryGetComponent(out IInteractuable interactuable))
+                {
+                    interactuable.Interact();
+                }
+            }
+        }
+    }
+
 }
