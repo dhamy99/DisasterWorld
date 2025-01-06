@@ -82,7 +82,10 @@ public class Player : MonoBehaviour
 
         foreach(Collider2D other in others)
         {
-            other.gameObject.GetComponent<LifeEngine>().GetDamage(damage);
+            if(other.TryGetComponent(out Enemy enemy))
+            {
+                enemy.GetDamage(damage);
+            }
         }
     }
 

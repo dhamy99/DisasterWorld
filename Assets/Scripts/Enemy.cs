@@ -9,9 +9,9 @@ public abstract class Enemy : MonoBehaviour
 
     protected float Life { get => life; set => life = value; }
 
-    protected abstract void Attack();
+    public abstract void Attack();
 
-    protected void GetDamage(float damage)
+    public void GetDamage(float damage)
     {
         life -= damage;
 

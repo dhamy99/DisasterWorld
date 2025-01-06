@@ -53,7 +53,7 @@ public class Mage : Enemy
         }
     }
 
-    protected override void Attack()
+    public override void Attack()
     {
         Instantiate(fireBall, firBallSpawn.position, transform.rotation);
     }
