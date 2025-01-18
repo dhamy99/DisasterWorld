@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float detectionRadio;
     [SerializeField] private LayerMask whatIsInteractable;
 
+    [SerializeField] private GameObject respawnPoint;
+
     
 
     private void Start()
@@ -118,6 +120,15 @@ public class Player : MonoBehaviour
                     interactuable.Interact();
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("DeathZone"))
+        {
+            GetComponent<LifeEngine>().GetDamage(10);
+            transform.position = respawnPoint.transform.position;
         }
     }
 

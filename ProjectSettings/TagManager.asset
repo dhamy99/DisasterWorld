@@ -8,6 +8,7 @@ TagManager:
   - PlayerDetection
   - Door
   - Key
+  - DeathZone
   layers:
   - Default
   - TransparentFX

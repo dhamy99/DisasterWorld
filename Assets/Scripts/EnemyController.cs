@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
         {
             currentState.OnExitState();
         }
-
+        Debug.Log(this.ToString());
         currentState = state;
         currentState.OnEnterState(this);
     }

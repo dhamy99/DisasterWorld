@@ -19,9 +19,9 @@ public class ChaseState : State<EnemyController>
         if(target)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, target.position) > stoppingDistance)
+            if (Vector3.Distance(transform.position, target.position) < stoppingDistance)
             {
-                controller.ChangeState(controller.AttackState);
+               controller.ChangeState(controller.AttackState);
             }
 
         }
